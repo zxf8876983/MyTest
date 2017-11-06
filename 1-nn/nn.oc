@@ -1,7 +1,7 @@
 #include<obliv.oh>
-#include"mult.h"
+#include"nn.h"
 
-void multiply(void* args)
+void nn(void* args)
 {
   protocolIO *io=args;
   obliv float v1;

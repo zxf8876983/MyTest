@@ -3,5 +3,5 @@ typedef struct protocolIO
   float res;
 } protocolIO;
 
-void multiply(void* args);
+void nn(void* args);
 

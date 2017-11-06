@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<obliv.h>
 
-#include"mult.h"
-#include"../../common/util.h"
+#include"nn.h"
+#include"../../obliv-c/test/oblivc/common/util.h"
 
 int main(int argc,char *argv[])
 {
@@ -20,7 +20,7 @@ int main(int argc,char *argv[])
   ocTestUtilTcpOrDie(&pd,remote_host,argv[1]);
   int currentParty = (remote_host?2:1);
   setCurrentParty(&pd,currentParty);
-  execYaoProtocol(&pd,multiply,&io);
+  execYaoProtocol(&pd,nn,&io);
   cleanupProtocol(&pd);
   fprintf(stderr,"Result: %f\n",io.res);
   return 0;

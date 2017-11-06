@@ -36,7 +36,7 @@ void main()
  float y[y_row][y_col];
  int i,j,k;
 
- if((fp=fopen("W.txt","r"))==NULL)
+ if((fp=fopen("parameter/W.txt","r"))==NULL)
  { 
   printf(" can't open");
   exit(0);
@@ -50,7 +50,7 @@ void main()
 }
 
 
- if((fp=fopen("b.txt","r"))==NULL)
+ if((fp=fopen("parameter/b.txt","r"))==NULL)
  { 
   printf(" can't open");
   exit(0);
@@ -64,7 +64,7 @@ void main()
 }
  
 
- if((fp=fopen("x.txt","r"))==NULL)
+ if((fp=fopen("parameter/x.txt","r"))==NULL)
  { 
   printf(" can't open");
   exit(0);
@@ -78,7 +78,7 @@ void main()
 }
   
 
- if((fp=fopen("y.txt","r"))==NULL)
+ if((fp=fopen("parameter/y.txt","r"))==NULL)
  { 
   printf(" can't open");
   exit(0);
