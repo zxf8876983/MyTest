@@ -1,0 +1,15 @@
+#include<obliv.oh>
+#include"mult.h"
+
+void multiply(void* args)
+{
+  protocolIO *io=args;
+  obliv float v1;
+  obliv float v2;
+  float result;
+  v1=feedOblivFloat(io->value,1);
+  v2=feedOblivFloat(io->value,2);
+  revealOblivFloat(&result,v1*v2,0);
+  //printf("%f\n",result);
+  io->res=result;
+}
