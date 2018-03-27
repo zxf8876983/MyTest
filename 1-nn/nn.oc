@@ -26,7 +26,9 @@ void nn(void* args)
   int i,j,k;
   obliv int m1[10][10];
   obliv int t=10000;
+  obliv int zero=0;
   int result;
+
   for(i=0;i<w_row;i++){
     for(j=0;j<w_col;j++){
       w[i][j]=feedOblivInt(io->w[i][j],1);
@@ -47,7 +49,7 @@ void nn(void* args)
 
 for(i=0;i<x_row;i++){
    for(j=0;j<w_col;j++){
-     obliv int s=0;
+     obliv int s=zero;
      for(k=0;k<x_col;k++){
        s+=(x[i][k]*w[k][j]);
        //printf("%ld\t",s);
@@ -55,11 +57,14 @@ for(i=0;i<x_row;i++){
      m1[i][j]=s/t+b[0][j];
      //m1[i][j]=s;
      //printf("%f\t",s);
-	 printf("%d\t",m1[i][j]);
+	 //printf("%d\t",m1[i][j]);
    }
-   printf("\n");
+   //printf("\n");
 }
 
+obliv int p=m1[0][0]+x[0][0];
+printf("zero:%f\n",zero);
+printf("t:%f\n",t);
 for(i=0;i<10;i++){
   revealOblivInt(&io->res[i],max(m1[i],10),0);
   //printf("%f\n",result);
