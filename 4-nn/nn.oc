@@ -1,0 +1,78 @@
+#include<obliv.oh>
+#include"nn.h"
+#include<stdio.h>
+#include<stdlib.h>
+
+
+obliv int max(obliv int *array,int n);
+
+ obliv int max(obliv int *array,int n){
+  int i;
+  obliv int index=0;
+  obliv int maxnum=array[0];
+  for(i=1;i<n;i++){
+    obliv if(maxnum<array[i]){
+      maxnum=array[i];
+      index=i;
+    }
+  }
+  return(index);
+ }
+
+void nn(void* args){
+	protocolIO *io=args;
+	int i,j,m,n;
+	obliv int k;
+	obliv int t=1000;
+	obliv int b1,b2;
+	obliv int zero=0;
+	obliv int bc2[fc2_col],h_fc1[fc1_col],fc2[fc1_col][fc2_col];
+
+
+	//h_fc1
+	for(i=0;i<fc1_col;i++){
+		 h_fc1[i]=feedOblivInt(io->h_fc1[i],2);
+		 //printf("%d\t",bc1[i]);
+	}
+	//fc2
+	for(i=0;i<fc2_row;i++){
+		for(j=0;j<fc2_col;j++){
+			 fc2[i][j]=feedOblivInt(io->fc2[i][j],1);
+			 //printf("%d\t",fc2[i][j]);
+		}
+	//printf("\n");
+	}
+	//bc2
+	for(i=0;i<fc2_col;i++){
+		bc2[i]=feedOblivInt(io->bc2[i],1);
+		//printf("%d\t",bc2[i]);
+	}
+
+
+	obliv int y_conv[fc2_col];
+	for(i=0;i<fc2_col;i++){
+		for(j=0;j<fc2_row;j++){
+			y_conv[i]+=h_fc1[j]*fc2[j][i];
+		}
+		y_conv[i]=y_conv[i]/t+bc2[i];
+		//revealOblivInt(&io->res[i],y_conv[i],0);
+		//printf("%d\t",y_conv[i]);
+	}
+	//printf("\n");
+
+	obliv int index=zero;
+	obliv int maxnum=y_conv[0];
+	for(i=0;i<y_col;i++){
+		obliv if(maxnum<y_conv[i]){
+			maxnum=y_conv[i];
+			index=i;
+		}
+	}
+
+	for(i=0;i<y_col;i++){
+		revealOblivInt(&io->y_conv[i],y_conv[i],2);
+	}
+	//revealOblivInt(&io->y_conv,y_conv,0);
+	revealOblivInt(&io->res,index,2);
+
+}

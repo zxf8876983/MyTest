@@ -32,8 +32,6 @@ int max(int array[],int n){
 	return(index);
 }
 
-
-
 void main(){
 
 	FILE *fp;
@@ -302,6 +300,10 @@ void main(){
 		if(h_fc1[i]<0) h_fc1[i]=0;
 		if(h_fc1[i+fc1_col/2]<0) h_fc1[i+fc1_col/2]=0;                //relu
 		//printf("%d\t",h_fc1[i]);
+	}
+
+	for(i=0;i<fc1_col;i++){
+		printf("%d\t",h_fc1[i]);	
 	}
 
 	int y_conv[fc2_col];

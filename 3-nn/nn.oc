@@ -105,14 +105,14 @@ void nn(void* args){
 
 
 //-----------------------------------------------------------
-//-----------------------------------------------------------
-	//obliv int h_conv1[x_row][x_col];
+
+	//h_conv1
 	obliv int **h_conv1 = malloc(sizeof(obliv int) *x_row);
 	for(i=0;i<x_row;i++){
 		h_conv1[i]=malloc(sizeof(obliv int) * x_col);	
 	}
 
-	//obliv int W1[x_row+4][x_col+4];
+	//W1
 	obliv int **W1 = malloc(sizeof(obliv int) *(x_row+4));
 	for(i=0;i<x_row+4;i++){
 		W1[i]=malloc(sizeof(obliv int) * (x_col+4));	
@@ -149,8 +149,9 @@ void nn(void* args){
 		//printf("\n");
 	}
 	free(W1);
+
 	//maxpool_1
-	//int h_pool1[x_row_pool1][x_col_pool1];
+	// h_pool1
 	obliv int **h_pool1 = malloc(sizeof(obliv int) *x_row_pool1);
 	for(i=0;i<x_row_pool1;i++){
 		h_pool1[i]=malloc(sizeof(obliv int) *x_col_pool1);	
@@ -174,7 +175,7 @@ void nn(void* args){
 	free(h_conv1);
 //---------------------------------------------------------------------
 
-	//int W2[x_row_pool1+4][x_col_pool1+4]={0};
+	// W2;
 
 	obliv int **W2 = malloc(sizeof(obliv int) *(x_row_pool1+4));
 	for(i=0;i<x_row;i++){
@@ -212,8 +213,9 @@ void nn(void* args){
 		//printf("\n");
 	}
 	free(W2);
+
 	//maxpool_2
-	//int h_pool2[x_row_pool2][x_col_pool2];
+	//h_pool2
 	obliv int **h_pool2 = malloc(sizeof(obliv int) *x_row_pool2);
 	for(i=0;i<x_row;i++){
 		h_pool2[i]=malloc(sizeof(obliv int) *x_col_pool2);	
@@ -260,19 +262,17 @@ void nn(void* args){
 		h_fc1[i+fc1_col/2]=h_fc1[i+fc1_col/2]/t+bc1[i+fc1_col/2];
 		//obliv if(h_fc1[i]<0) h_fc1[i]=0;
 
-		//ovliv if(h_fc1[i+fc1_col/2]<0) //h_fc1[i+fc1_col/2]=0;              //relu
+		//ovliv if(h_fc1[i+fc1_col/2]<0) //h_fc1[i+fc1_col/2]=0;              
 		//printf("%d\t",h_fc1[i]);
 	}
 	free(h_pool2_flat);
 
-	for(i=0;i<fc1_col;i++){
+	//relu
+	for(i=0;i<fc1_col;i++){ 
 		obliv if(h_fc1[i]<0) h_fc1[i]=0;
 	}
 
 
-
-	//int y_conv[fc2_col];
-	//obliv int *y_conv = malloc(sizeof(obliv int) *fc2_col);
 	obliv int y_conv[fc2_col];
 	for(i=0;i<fc2_col;i++){
 		for(j=0;j<fc2_row;j++){
@@ -284,6 +284,7 @@ void nn(void* args){
 	}
 	//printf("\n");
 	free(h_fc1);
+
 	obliv int index=zero;
 	obliv int maxnum=y_conv[0];
 	for(i=0;i<y_col;i++){
@@ -294,10 +295,17 @@ void nn(void* args){
 	}
 
 	for(i=0;i<y_col;i++){
-		revealOblivInt(&io->y_conv[i],y_conv[i],0);
+		revealOblivInt(&io->y_conv[i],y_conv[i],2);
 	}
 	//revealOblivInt(&io->y_conv,y_conv,0);
-	revealOblivInt(&io->res,index,0);
+	revealOblivInt(&io->res,index,2);
 
-	//free(y_conv);
+	//free(W1);
+	//free(h_conv1);
+	//free(h_pool1);
+	//free(W2);
+	//free(h_conv2);
+	//free(h_pool2);
+	//free(h_pool2_flat);
+	//free(h_fc1);
 }

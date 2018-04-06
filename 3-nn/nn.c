@@ -184,12 +184,17 @@ protocolConnectTcp2P(&pd,argv[3],argv[2]);
   execYaoProtocol(&pd,nn,&io);
   cleanupProtocol(&pd);
   //fprintf(stderr,"Result: %d\n",io.res);
-
-  for(i=0;i<y_col;i++){
-    fprintf(stderr,"%d\t",io.y_conv[i]);
-  }
-  printf("\n");
-  fprintf(stderr,"Result: %d\n",io.res);
+/*
+  if(currentParty==2){
+	  for(i=0;i<y_col;i++){
+		fprintf(stderr,"%d\t",io.y_conv[i]);
+		if((i+1)%8==0) printf("\n");
+	  }
+	  printf("\n\n");
+	  if(io.res==0) printf("你是编号为0的人");
+	  printf("\n");
+  	  //fprintf(stderr,"Result: %d\n",io.res);
+  }*/
   end = clock();
   double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
   fprintf(stderr,"Elapsed Time: %f\n",cpu_time_used);
