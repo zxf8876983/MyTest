@@ -67,9 +67,10 @@ if(currentParty==1){
 		}
 		fclose(fp);
 	}
+ 
 
-
-protocolAcceptTcp2P(&pd,argv[2]);
+//protocolAcceptTcp2P(&pd,argv[2]);
+protocolAcceptTcp2PProfiled(&pd,argv[2]);
 
 }
  
@@ -321,7 +322,9 @@ if(currentParty==2){
 	//printf("\n");
 
 
-protocolConnectTcp2P(&pd,argv[3],argv[2]);
+//protocolConnectTcp2P(&pd,argv[3],argv[2]);
+protocolConnectTcp2PProfiled(&pd,argv[3],argv[2]);
+
 }
 
   clock_t start, end;
@@ -346,5 +349,9 @@ protocolConnectTcp2P(&pd,argv[3],argv[2]);
   end = clock();
   double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
   fprintf(stderr,"Elapsed Time: %f\n",cpu_time_used);
+  size_t comm = tcp2PBytesSent(&pd);
+  printf("total communication : %zu \n", comm);
+  size_t flush = tcp2PFlushCount(&pd);
+  printf("total flush_count : %zu \n", flush);
   return 0;
 }

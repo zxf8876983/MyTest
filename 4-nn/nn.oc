@@ -74,5 +74,6 @@ void nn(void* args){
 	}
 	//revealOblivInt(&io->y_conv,y_conv,0);
 	revealOblivInt(&io->res,index,2);
-
+	int gates = yaoGateCount();
+	printf("gates counts:%d\n",gates);
 }

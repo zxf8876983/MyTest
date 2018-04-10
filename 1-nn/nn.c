@@ -23,12 +23,12 @@ int main(int argc,char *argv[])
     return 1;
   }*/
 
-/*
+
 const char* remote_host = (strcmp(argv[2],"--")?argv[2]:NULL);
 ocTestUtilTcpOrDie(&pd,remote_host,argv[1]);
 int currentParty = (remote_host?2:1);
-*/
-int currentParty = (argv[1][0]=='1')?1:2;
+
+//int currentParty = (argv[1][0]=='1')?1:2;
 
 if(currentParty==1){
 
@@ -60,7 +60,7 @@ if(currentParty==1){
    }
  fclose(fp);
 }
-protocolAcceptTcp2P(&pd,argv[2]);
+//protocolAcceptTcp2P(&pd,argv[2]);
 }
  
 if(currentParty==2){
@@ -78,7 +78,7 @@ if(currentParty==2){
    }
  fclose(fp);
 }
-protocolConnectTcp2P(&pd,argv[3],argv[2]);
+//protocolConnectTcp2P(&pd,argv[3],argv[2]);
 }
 
   clock_t start, end;
@@ -93,5 +93,7 @@ protocolConnectTcp2P(&pd,argv[3],argv[2]);
   end = clock();
   double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
   fprintf(stderr,"Elapsed Time: %f\n",cpu_time_used);
+  size_t comm = tcp2PBytesSent(&pd);
+  printf("total communication : %zu \n", comm);
   return 0;
 }
